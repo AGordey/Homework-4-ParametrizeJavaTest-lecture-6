@@ -1,5 +1,6 @@
 package com.demoqa;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.selector.ByText;
@@ -9,10 +10,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
+import static org.openqa.selenium.support.ui.ExpectedConditions.invisibilityOfElementLocated;
 
 public class RailWaySiteTest {
 
@@ -38,7 +41,8 @@ public class RailWaySiteTest {
 
     @CsvSource ( value = {
             "Минск | Гродно",
-            "Минск | Витебск"
+            "Минск | Витебск",
+            "Гродно | Могилёв"
                },
     delimiter = '|'
     )
@@ -50,15 +54,10 @@ public class RailWaySiteTest {
         $("#acTo").setValue(toCity);
         //$(".ac_even.ac_over").click();
         $x("/html/body/div[3]/div[3]/div[3]/div/div[3]/div[2]/div/form/div[2]/div[3]/a[3]").click();
-        $("button[type='submit']").click();
-
-
-        //$(".menu-items").shouldHave(text(footerData));
+        $("input[type='submit']").click();
+        sleep(5000);
+        $(".sch-title__title.h2").shouldHave(text(fromCity + " — " + toCity + ","));
     }
-
-
-
-
 
 }
 
