@@ -1,25 +1,15 @@
 package com.demoqa;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.selector.ByText;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.openqa.selenium.By;
-
 import java.util.stream.Stream;
-
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
-import static org.openqa.selenium.support.ui.ExpectedConditions.invisibilityOfElementLocated;
+
 
 public class RailWaySiteTest {
 
@@ -62,8 +52,6 @@ public class RailWaySiteTest {
         sleep(4000); //шакальная команда, но без нее иногда сайт не успевал прогружаться и тест падал
         $(".sch-title__title.h2").shouldHave(text(fromCity + " — " + toCity + ","));
     }
-
-
     static Stream<Arguments> checkHaveTrailWithStream () {
         return Stream.of (
             Arguments.of("Барановичи","Москва"),
