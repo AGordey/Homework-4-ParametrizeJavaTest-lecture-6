@@ -13,11 +13,6 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class RailWaySiteTest {
 
-//    @BeforeAll
-//    static void setUp() {
-//        Configuration.holdBrowserOpen = true;
-//        Configuration.browserSize = "1920x1080";
-
     @ValueSource (strings = {
             "КОНТАКТЫ",
             "УСЛУГИ ПАССАЖИРАМ",
@@ -60,7 +55,7 @@ public class RailWaySiteTest {
     );
     }
     @MethodSource ("checkHaveTrailWithStream")
-    @ParameterizedTest (name = "Маршрут из {0} в {1} через Arguments")
+    @ParameterizedTest (name = "Маршрут из {0} в {1} ")
     void checkHaveTrailWithStream (String fromCity, String toCity) {
         Selenide.open("https://www.rw.by");
         $("#acFrom").setValue(fromCity);
