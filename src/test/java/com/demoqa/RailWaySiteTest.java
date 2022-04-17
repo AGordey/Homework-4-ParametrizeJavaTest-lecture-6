@@ -6,9 +6,12 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.openqa.selenium.By;
+
 import java.util.stream.Stream;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
+import static org.openqa.selenium.By.linkText;
 
 
 public class RailWaySiteTest {
@@ -42,9 +45,8 @@ public class RailWaySiteTest {
         $(".ac_even.ac_over").click();
         $("#acTo").setValue(toCity);
         $(".ac_even.ac_over").click();
-        $x("/html/body/div[3]/div[3]/div[3]/div/div[3]/div[2]/div/form/div[2]/div[3]/a[3]").click();
+        $(linkText("на все дни")).click();
         $("input[type='submit']").click();
-        //sleep(4000); //шакальная команда, но без нее иногда сайт не успевал прогружаться и тест падал
         $(".sch-title__title.h2").shouldHave(text(fromCity + " — " + toCity + ","));
     }
     static Stream<Arguments> checkHaveTrailWithStream () {
@@ -62,9 +64,8 @@ public class RailWaySiteTest {
         $(".ac_even.ac_over").click();
         $("#acTo").setValue(toCity);
         $(".ac_even.ac_over").click();
-        $x("/html/body/div[3]/div[3]/div[3]/div/div[3]/div[2]/div/form/div[2]/div[3]/a[3]").click();
+        $(linkText("на все дни")).click();
         $("input[type='submit']").click();
-        //sleep(4000); //шакальная команда, но без нее иногда сайт не успевал прогружаться и тест падал
         $(".sch-title__title.h2").shouldHave(text(fromCity + " — " + toCity + ","));
     }
 }
