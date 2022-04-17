@@ -24,16 +24,16 @@ public class RailWaySiteTest {
     })
     @ParameterizedTest (name = "Наличие вкладки {0} в хедере")
     void checkHeader (String footerData) {
-    Selenide.open("https://www.rw.by");
-    $(".menu-items").shouldHave(text(footerData));
+        Selenide.open("https://www.rw.by");
+        $(".menu-items").shouldHave(text(footerData));
     }
 
-    @CsvSource ( value = {
+    @CsvSource (value = {
             "Минск | Гродно",
             "Минск | Витебск",
-            "Гродно | Могилёв"
-               },
-    delimiter = '|'
+            "Гродно | Брест"
+    },
+            delimiter = '|'
     )
     @ParameterizedTest (name = "Маршрут из {0} в {1}")
     void checkHaveTrail (String fromCity, String toCity) {
@@ -41,18 +41,18 @@ public class RailWaySiteTest {
         $("#acFrom").setValue(fromCity);
         $(".ac_even.ac_over").click();
         $("#acTo").setValue(toCity);
-        //$(".ac_even.ac_over").click();
+        $(".ac_even.ac_over").click();
         $x("/html/body/div[3]/div[3]/div[3]/div/div[3]/div[2]/div/form/div[2]/div[3]/a[3]").click();
         $("input[type='submit']").click();
-        sleep(4000); //шакальная команда, но без нее иногда сайт не успевал прогружаться и тест падал
+        //sleep(4000); //шакальная команда, но без нее иногда сайт не успевал прогружаться и тест падал
         $(".sch-title__title.h2").shouldHave(text(fromCity + " — " + toCity + ","));
     }
     static Stream<Arguments> checkHaveTrailWithStream () {
         return Stream.of (
-            Arguments.of("Барановичи","Москва"),
-            Arguments.of("Полоцк","Брест"),
-            Arguments.of("Гродно","Гомель")
-    );
+                Arguments.of("Барановичи","Москва"),
+                Arguments.of("Полоцк","Брест"),
+                Arguments.of("Гродно","Гомель")
+        );
     }
     @MethodSource ("checkHaveTrailWithStream")
     @ParameterizedTest (name = "Маршрут из {0} в {1} ")
@@ -61,11 +61,10 @@ public class RailWaySiteTest {
         $("#acFrom").setValue(fromCity);
         $(".ac_even.ac_over").click();
         $("#acTo").setValue(toCity);
-        //$(".ac_even.ac_over").click();
+        $(".ac_even.ac_over").click();
         $x("/html/body/div[3]/div[3]/div[3]/div/div[3]/div[2]/div/form/div[2]/div[3]/a[3]").click();
         $("input[type='submit']").click();
-        sleep(4000); //шакальная команда, но без нее иногда сайт не успевал прогружаться и тест падал
+        //sleep(4000); //шакальная команда, но без нее иногда сайт не успевал прогружаться и тест падал
         $(".sch-title__title.h2").shouldHave(text(fromCity + " — " + toCity + ","));
     }
 }
-
